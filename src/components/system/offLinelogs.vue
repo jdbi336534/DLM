@@ -2,32 +2,40 @@
     <div class="offlinelogs">
         <div class="offlinelogs-top-box">
             <div class="btn_group">
-                <el-button type="primary" class="timebtn">
-                    <!-- <i class="el-icon--right"><img src="../../assets/img/system/topimg/calendar2.png"></i> -->
-                    <el-date-picker v-model="datevalue" type="daterange" placeholder="选择时间范围" @change="datechange">
-                    </el-date-picker>
-                </el-button>
-                <el-button type="primary" class="nodebtn">
-                    <!--  <i class="el-icon--right"><img src="../../assets/img/system/topimg/node.png"></i> -->
-                    <el-select v-model="nodevalue" placeholder="选择节点" @change="nodechange" clearable>
-                        <el-option v-for="item in node" :key="item.key" :label="item.key" :value="item.key">
-                        </el-option>
-                    </el-select>
-                </el-button>
-                <el-button type="primary" class="servicebtn">
-                    <!-- <i class="el-icon--right"><img src="../../assets/img/system/topimg/service2.png"></i> -->
-                    <el-select v-model="namevalue" placeholder="选择服务" @change="namechange" clearable>
-                        <el-option v-for="item in name" :key="item.key" :label="item.key" :value="item.key">
-                        </el-option>
-                    </el-select>
-                </el-button>
-                <el-button type="primary" class="logbtn">
-                    <!--  <i class="el-icon--right"><img src="../../assets/img/system/topimg/calendar2.png"></i> -->
-                    <el-select v-model="levelvalue" placeholder="选择日志级别" @change="levelchange" clearable>
-                        <el-option v-for="item in level" :key="item.key" :label="item.key" :value="item.key">
-                        </el-option>
-                    </el-select>
-                </el-button>
+                <el-tooltip :content="contenttime" placement="top">
+                    <el-button type="primary" class="timebtn">
+                        <!-- <i class="el-icon--right"><img src="../../assets/img/system/topimg/calendar2.png"></i> -->
+                        <el-date-picker v-model="datevalue" type="daterange" placeholder="选择时间范围" @change="datechange">
+                        </el-date-picker>
+                    </el-button>
+                </el-tooltip>
+                <el-tooltip :content="contentnode" placement="top">
+                    <el-button type="primary" class="nodebtn">
+                        <!--  <i class="el-icon--right"><img src="../../assets/img/system/topimg/node.png"></i> -->
+                        <el-select v-model="nodevalue" placeholder="选择节点" @change="nodechange" clearable>
+                            <el-option v-for="item in node" :key="item.key" :label="item.key" :value="item.key">
+                            </el-option>
+                        </el-select>
+                    </el-button>
+                </el-tooltip>
+                <el-tooltip :content="contentservice" placement="top">
+                    <el-button type="primary" class="servicebtn">
+                        <!-- <i class="el-icon--right"><img src="../../assets/img/system/topimg/service2.png"></i> -->
+                        <el-select v-model="namevalue" placeholder="选择服务" @change="namechange" clearable>
+                            <el-option v-for="item in name" :key="item.key" :label="item.key" :value="item.key">
+                            </el-option>
+                        </el-select>
+                    </el-button>
+                </el-tooltip>
+                <el-tooltip :content="contentlog" placement="top">
+                    <el-button type="primary" class="logbtn">
+                        <!--  <i class="el-icon--right"><img src="../../assets/img/system/topimg/calendar2.png"></i> -->
+                        <el-select v-model="levelvalue" placeholder="选择日志级别" @change="levelchange" clearable>
+                            <el-option v-for="item in level" :key="item.key" :label="item.key" :value="item.key">
+                            </el-option>
+                        </el-select>
+                    </el-button>
+                </el-tooltip>
                 <el-button type="primary" class="downloadbtn">
                     <!-- <i class="el-icon--right downicon"></i> -->
                     导出
@@ -78,6 +86,10 @@ export default {
     components: {},
     data() {
         return {
+            contenttime: '选择时间范围',
+            contentnode: '选择节点',
+            contentservice: '选择服务',
+            contentlog: '选择日志级别',
             currentPage: 1,
             pageSize: 20,
             total: 0,
@@ -159,19 +171,23 @@ export default {
             });
         },
         datechange(val) {
+            this.contenttime = val;
             this.time = val.split(' - ');
             this.queryTabledata();
         },
         nodechange(val) {
-            console.log('node:', val);
+            this.contentnode = val;
+            // console.log('node:', val);
             this.queryTabledata();
         },
         namechange(val) {
-            console.log('name:', val);
+            this.contentservice = val;
+            // console.log('name:', val);
             this.queryTabledata();
         },
         levelchange(val) {
-            console.log('level:', val);
+            this.contentlog = val;
+            // console.log('level:', val);
             this.queryTabledata();
         },
         handleCurrentChange(val) {
@@ -181,7 +197,7 @@ export default {
             this.pageSize = val;
         },
         presskey(e) {
-            console.log(e.target.value);
+            // console.log(e.target.value);
             this.loading = true;
             let data = {};
             if (this.time.length < 2) {

@@ -2,10 +2,10 @@
     <div class="zero-servicedetail-box">
         <div class="servicedetail-chart">
             <div class="servicedetail-cpu-box">
-                <cpu-chart @cpuresize='cpuresize' ref='cpu'></cpu-chart>
+                <chart :options="cpuchart" auto-resize></chart>
             </div>
             <div class="servicedetail-memory-box">
-                <memory-chart @memoryresize='memoryresize' ref='memory'></memory-chart>
+                <chart :options="memorychart" auto-resize></chart>
             </div>
         </div>
         <div class="servicedetail-table">
@@ -70,103 +70,287 @@
     </div>
 </template>
 <script>
-import cpuChart from '../common/Cpuchart';
-import memoryChart from '../common/Memorychart';
 import {
     servicesDiscoverydetails,
-    getPods
+    getPods,
+    virnodeone
 } from '../../assets/js/queryData';
+import echarts from 'echarts';
 export default {
     data() {
             return {
                 currentPage3: 1,
                 total: 1,
                 resizelist: [],
-                detailedinformation: null,
-                virtuualnode: [],
-                cpuchartdata: {
-                    cpuobj: {
-                        ip: this.$route.params.node,
-                        type: 'cpu',
-                        name: 'usage'
+                detailedinformation: {
+                    'metadata': {
+                        'name': null,
+                        'namespace': null,
+                        'selfLink': '/api/v1/namespaces/kube-system/services/elasticsearch-logging',
+                        'uid': '20ff53cc-2431-11e7-a3f7-84ad58d9f6ca',
+                        'resourceVersion': '2986051',
+                        'creationTimestamp': '2017-04-18T12:18:28Z',
+                        'labels': {
+                            'addonmanager.kubernetes.io/mode': null,
+                            'k8s-app': null,
+                            'kubernetes.io/cluster-service': null,
+                            'kubernetes.io/name': null
+                        },
+                        'labelslist': [
+                            null,
+                        ]
                     },
-                    type: 'one',
-                    pagetype: 'virtualnode',
+                    'spec': {
+                        'ports': [{
+                            'protocol': null,
+                            'port': null,
+                            'targetPort': null,
+                            'nodePort': null
+                        }],
+                        'selector': {
+                            'k8s-app': null
+                        },
+                        'clusterIP': null,
+                        'type': null,
+                        'sessionAffinity': null
+                    },
+                    'status': {
+                        'loadBalancer': {}
+                    }
                 },
-                memorychartdata: {
-                    memoryobj: {
-                        ip: this.$route.params.node,
-                        type: 'memory',
-                        name: 'usage'
+                virtuualnode: [],
+                cpuobj: {
+                    ip: this.$route.params.node,
+                    type: 'cpu',
+                    name: 'usage'
+                },
+                memoryobj: {
+                    ip: this.$route.params.ip,
+                    type: 'memory',
+                    name: 'usage'
+                },
+                cpuchart: {
+                    title: {
+                        text: 'cpu',
+                        textStyle: {
+                            color: 'rgba(250,250,250,0.6)',
+                            fontSize: 12,
+                        },
+                        borderColor: 'rgba(36,202,243,1)',
+                        borderWidth: 1,
+                        left: '12',
+                        top: '0',
                     },
-                    type: 'one',
-                    pagetype: 'virtualnode',
+                    grid: {
+                        left: '100',
+                        right: '40',
+                        top: '36',
+                        bottom: '32',
+                        borderWidth: 1
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    dataZoom: [{
+                        type: 'inside',
+                        realtime: true,
+                    }],
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        interval: 0,
+                        splitLine: {
+                            show: false,
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: 'rgba(250,250,250,0.7)',
+                                fontSize: 12,
+                            },
+                        },
+                        data: []
+                    },
+                    yAxis: {
+                        splitLine: {
+                            show: false,
+                        },
+                        type: 'value',
+                        axisLabel: {
+                            textStyle: {
+                                color: 'rgba(250,250,250,0.7)',
+                                fontSize: 12,
+                            },
+                            formatter: '{value}'
+                        },
+                        min: 'dataMin',
+                    },
+                    series: [{
+                        name: 'cpu',
+                        type: 'line',
+                        data: [],
+                        symbol: 'none',
+                        lineStyle: {
+                            normal: {
+                                width: 1,
+                                // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                //     offset: 0,
+                                //     color: 'rgba(48, 120,192,1)'
+                                // }, {
+                                //     offset: 1,
+                                //     color: 'rgba(48, 120,192,0.5)'
+                                // }], false)
+                                color: 'rgba(48, 120,192,1)'
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgba(48, 120,192,0.4)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(48, 120,192,0.16)'
+                                }], false)
+                            }
+                        },
+                    }],
+                },
+                memorychart: {
+                    title: {
+                        text: '内存',
+                        textStyle: {
+                            color: 'rgba(250,250,250,0.6)',
+                            fontSize: 12,
+                        },
+                        borderColor: 'rgba(36,202,243,1)',
+                        borderWidth: 1,
+                        left: '52',
+                        top: '0',
+                    },
+                    grid: {
+                        left: '150',
+                        right: '40',
+                        top: '36',
+                        bottom: '32',
+                        borderWidth: 1
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    dataZoom: [{
+                        type: 'inside',
+                        realtime: true,
+                    }],
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        splitLine: {
+                            show: false,
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: 'rgba(250,250,250,0.7)',
+                                fontSize: 12,
+                            },
+                        },
+                        data: []
+                    },
+                    yAxis: {
+                        splitLine: {
+                            show: false,
+                        },
+                        type: 'value',
+                        axisLabel: {
+                            textStyle: {
+                                color: 'rgba(250,250,250,0.7)',
+                                fontSize: 12,
+                            },
+                            formatter: '{value}GB'
+                        },
+                        min: 'dataMin',
+                    },
+                    series: [{
+                        name: '内存使用率',
+                        type: 'line',
+                        data: [],
+                        symbol: 'none',
+                        lineStyle: {
+                            normal: {
+                                color: 'rgba(145,40,102,1)'
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: 'rgba(145,40,102,0.4)'
+                            }
+                        }
+                    }]
                 },
             }
         },
-        components: {
-            cpuChart,
-            memoryChart,
-        },
+        components: {},
         beforeUpdate() {},
         updated() {},
-        created() {},
+        created() {
+
+        },
         mounted() {
+            // 服务详情
             servicesDiscoverydetails(this.$route.params.ip).then(res => {
-                console.log('servicesDiscoverydetails-res', res)
-                this.detailedinformation = res;
-                var arr = [];
-                for (let i in this.detailedinformation.metadata.labels) {
-                    var str = i + ':' + this.detailedinformation.metadata.labels[i];
-                    arr.push(str);
-                }
-                this.detailedinformation.metadata.labelslist = arr;
-                console.log('this.detailedinformation', this.detailedinformation)
-                console.log(this.detailedinformation.spec.selector['k8s-app'])
-            })
+                    this.detailedinformation = res;
+                    var arr = [];
+                    for (let i in this.detailedinformation.metadata.labels) {
+                        var str = i + ':' + this.detailedinformation.metadata.labels[i];
+                        arr.push(str);
+                    }
+                    this.detailedinformation.metadata.labelslist = arr;
+                })
+                // 获取虚拟节点
             getPods('kube-system', '').then(res => {
-                console.log('xnjd', res)
-                console.log(this.detailedinformation.spec.selector['k8s-app'])
+                // console.log('res:', res);
+                // console.log('this.detailedinformation:', this.detailedinformation);
                 for (let k = 0; k < res.items.length; k++) {
-                    if (res.items[k].metadata.labels['k8s-app'] === this.detailedinformation.spec.selector['k8s-app'] || res.items[k].metadata.labels['app'] === this.detailedinformation.spec.selector['k8s-app']) {
-                        this.virtuualnode.push(res.items[k])
+                    if (res.items[k].metadata.labels['k8s-app'] || res.items[k].metadata.labels['app'] === this.detailedinformation.spec.selector['k8s-app'] || this.detailedinformation.spec.selector['app']) {
+                        this.virtuualnode.push(res.items[k]);
                     }
                 }
                 console.log('this.virtuualnode', this.virtuualnode)
                 if (this.virtuualnode.length === 0) {
-                    this.cpuchartdata.cpuobj.ip = 'elasticsearch-logging-v1-h3psz';
-                    this.memorychartdata.memoryobj.ip = 'elasticsearch-logging-v1-h3psz';
+                    this.cpuobj.ip = 'elasticsearch-logging-v1-h3psz';
+                    this.memoryobj.ip = 'elasticsearch-logging-v1-h3psz';
                 } else {
-                    this.cpuchartdata.cpuobj.ip = this.virtuualnode[0].metadata.name;
-                    this.memorychartdata.memoryobj.ip = this.virtuualnode[0].metadata.name;
-                    this.$refs.cpu.assignment(this.cpuchartdata)
-                    this.$refs.memory.assignment(this.memorychartdata)
+                    let num = parseInt(Math.random() * this.virtuualnode.length);
+                    this.cpuobj.ip = this.virtuualnode[num].metadata.name;
+                    this.memoryobj.ip = this.virtuualnode[num].metadata.name;
+                    console.log('test', this.virtuualnode[num].metadata.name, num);
                 }
-            })
-
-            var that = this;
-            window.onresize = function() {
-                console.log('window.onresize')
-                console.log('that.resizelist', that.resizelist)
-                console.log('that.resizelist', that.resizelist.length)
-                for (var k = 0; k < that.resizelist.length; k++) {
-                    console.log('k', that.resizelist[k])
-                    that.resizelist[k].resize();
-                }
-            }
+            }).then(() => {
+                // 获取cpu图表数据
+                virnodeone(this.cpuobj).then(res => {
+                    this.changedata(res, this.cpuchart);
+                });
+                virnodeone(this.memoryobj).then(res => {
+                    this.changedata(res, this.memorychart);
+                })
+            });
         },
         computed: {},
         methods: {
-            cpuresize(nodeval) {
-                this.resizelist.push(nodeval);
-            },
-            memoryresize(nodeval) {
-                this.resizelist.push(nodeval);
-            },
             handleSizeChange() {
 
             },
             handleCurrentChange() {},
+            changedata(resdata, chartdata) {
+                let xAxisdata = [];
+                let seriesdata = [];
+                for (let i in resdata.metrics) {
+                    var timestring = resdata.metrics[i].timestamp.substring(11, 16);
+                    xAxisdata.push(timestring);
+                    seriesdata.push(resdata.metrics[i].value)
+                }
+                chartdata.xAxis.data = xAxisdata;
+                chartdata.series[0].data = seriesdata;
+            },
         },
 }
 </script>
@@ -193,11 +377,15 @@ export default {
             width: 50%;
             height: 100%;
             float: left;
+            .echarts {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
     .servicedetail-table {
         box-shadow: 0 4px 28px 0 rgba(0, 0, 0, 0.50), inset 0 0 28px 0 rgba(53, 215, 255, 0.4);
-        padding-bottom: 40px;
+        margin-bottom: 30px;
         p {
             font-size: 16px;
         }

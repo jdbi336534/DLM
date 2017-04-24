@@ -608,12 +608,13 @@ export default {
             cascadChange(val) {
                 if (val[1]) {
                     this.cpuchartloading = true;
+                    this.content = val[1];
                     virnodeone({
                         ip: val[1],
                         type: 'cpu',
                         name: 'usage_rate'
                     }).then(res => {
-                        console.log('fuck:', res);
+                        // console.log('fuck:', res);
                         this.cpuchartloading = false;
                         this.changedata(res, this.logscpuoption);
                     });
@@ -625,13 +626,14 @@ export default {
                     });
                 }
                 if (val[1]) {
+                    this.content = val[1];
                     this.memorychartloading = true;
                     virnodeone({
                         ip: val[1],
                         type: 'memory',
                         name: 'usage'
                     }).then(res => {
-                        console.log('fuck:', res);
+                        // console.log('fuck:', res);
                         this.memorychartloading = false;
                         this.changedata(res, this.logsavalableoption);
                     });

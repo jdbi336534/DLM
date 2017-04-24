@@ -31,7 +31,7 @@ export default {
         // for (var i = 0; i < 5; i++) {
         //     this.dataShadow.push(500);
         // }
-        console.log('optionarg', this.optionarg)
+        // console.log('optionarg', this.optionarg)
         this.option = this.optionarg
             // this.optionnetwork = this.optionnetworkarg
             //  console.log('this.optionnetwork', this.optionnetwork)
@@ -45,7 +45,7 @@ export default {
     computed: {},
     methods: {
         drew(obj) {
-            console.log('renetwork')
+            // console.log('renetwork')
             var myoneareaChart = echarts.init(document.getElementsByClassName(obj.id)[0]);
             myoneareaChart.setOption(obj.option);
             this.$emit('nodeval', myoneareaChart);

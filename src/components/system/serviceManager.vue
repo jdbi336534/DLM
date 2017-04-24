@@ -156,16 +156,16 @@ export default {
         },
         Delete(index, row) {
             deleteservicesDiscovery(row.metadata.name).then(res => {
-                console.log(res);
+                // console.log(res);
             });
         },
         Lookup(index, row) {
-            console.log(index, row);
+            // console.log(index, row);
         }
     },
     watch: {
         dom(val) {
-            console.log('this.dom:val', val);
+            // console.log('this.dom:val', val);
             $('.el-dropdown-menu').offset({
                 left: val.left + 17
             });
@@ -173,7 +173,7 @@ export default {
     },
     mounted() {
         getServices().then(res => {
-            console.log('getServices', res)
+            // console.log('getServices', res)
             this.servicelistdata = res.items;
             for (var j = 0; j < this.servicelistdata.length; j++) {
                 var arr = [];
@@ -184,7 +184,7 @@ export default {
                 var labelstring = arr.join('; ');
                 this.servicelistdata[j].metadata.labelstring = labelstring;
             }
-            console.log('this.servicelistdata', JSON.stringify(this.servicelistdata[0], null, 4));
+            // console.log('this.servicelistdata', JSON.stringify(this.servicelistdata[0], null, 4));
         })
         var that = this;
         window.onresize = function() {

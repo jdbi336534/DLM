@@ -3,7 +3,7 @@
         <!--  配置管理主页  -->
         <div class="configManagment-top-box">
             <div class="btn_group">
-                <el-button type="primary"><i class="el-icon-plus el-icon--left"></i>新建</el-button>
+                <el-button type="primary" @click="newconfigbtn"><i class="el-icon-plus el-icon--left"></i>新建</el-button>
                 <el-button type="primary" class=" el-button-search">
                     <i class="el-icon--right"><img src="../../assets/img/system/topimg/searchimg.png"></i>
                     <input type="text" id="search" placeholder="" @keypress="presskey">
@@ -183,6 +183,30 @@
             </div>
         </modal-box>
         <!-- 查看依赖弹框 -->
+        <!-- 新建配置 -->
+        <modal-box :visible="newModalVisable" titlename="Add Preject" :dispconfirm="true" @click-close="newcloseModal" btnname="提交" @click-ok="submit('newpro')">
+            <div slot="jdb" class="dependon">
+                <div class="addconfig">
+                    <div class="configForm">
+                        <el-form :model="newruleForm" ref="newpro" label-width="100px" label-position="left">
+                            <el-form-item label="groupld" prop="name">
+                                <el-input v-model="newruleForm.group"></el-input>
+                            </el-form-item>
+                            <el-form-item label="artifactid" prop="name">
+                                <el-input v-model="newruleForm.artifact"></el-input>
+                            </el-form-item>
+                            <el-form-item label="version" prop="name">
+                                <el-input v-model="newruleForm.version"></el-input>
+                            </el-form-item>
+                            <el-form-item label="description" prop="name">
+                                <el-input v-model="newruleForm.description"></el-input>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </div>
+        </modal-box>
+        <!-- 新建配置 -->
     </div>
 </template>
 <script>
@@ -195,12 +219,19 @@ export default {
     },
     data() {
         return {
+            newruleForm: {
+                artifact: null,
+                description: '',
+                version: '',
+                group: '',
+            },
+            newModalVisable: false,
             ModalVisable: false,
             lookupModalVisable: false,
             titlename: '查看/添加配置',
-            configshow: true,
-            depend_configshow: true,
-            batchconfigshow: true,
+            configshow: false,
+            depend_configshow: false,
+            batchconfigshow: false,
             showtable: true,
             showjson: false,
             search: '',
@@ -242,7 +273,8 @@ export default {
             datalistz: [{
                 group: 'com.r7data',
                 artifact: 'service-eureka',
-                version: '0.0.1'
+                version: '0.0.1',
+                description: '',
             }],
             options: [{
                 value: '选项1',
@@ -265,6 +297,15 @@ export default {
     },
     methods: {
         // 关闭弹窗事件
+        newcloseModal() {
+            this.newModalVisable = false;
+            this.newruleForm = {
+                artifact: null,
+                description: '',
+                version: '',
+                group: '',
+            };
+        },
         closeModal() {
             this.ModalVisable = false;
         },
@@ -281,7 +322,7 @@ export default {
         },
         // 以什么格式去查看
         lookuptype(val) {
-            console.log(val);
+            // console.log(val);
             if (val === '1') {
                 this.showjson = false;
                 this.showtable = true;
@@ -297,6 +338,21 @@ export default {
         // 查看依赖
         Lookrely() {
             this.lookupModalVisable = true;
+        },
+        // 点击新建
+        newconfigbtn() {
+            this.newModalVisable = true;
+        },
+        // 点击新建提交
+        submit() {
+            this.newModalVisable = false;
+            this.datalistz.push(this.newruleForm);
+            this.newruleForm = {
+                artifact: null,
+                description: '',
+                version: '',
+                group: '',
+            };
         },
         // 搜索
         presskey() {},

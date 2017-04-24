@@ -136,7 +136,7 @@
                         <div style="height:40px;width:120px;float:left;" class="linechartbox">
                             <chart :options="scope.row.cpudata" auto-resize></chart>
                         </div>
-                        <span class="el-table-column-span"> 787888</span>
+                        <span class="el-table-column-span  linechartboxspan"> 787888</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="address" label="内存(bytes)" show-overflow-tooltip>
@@ -144,7 +144,7 @@
                         <div style="height:40px;width:120px;float:left;" class="linechartbox">
                             <chart :options="scope.row.memorydata" auto-resize></chart>
                         </div>
-                        <span class="el-table-column-span">wrrthojk787888</span>
+                        <span class="el-table-column-span linechartboxspan">wrrthojk787888</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="address" label="" width="90">
@@ -472,7 +472,8 @@ export default {
         // 虚拟节点表格中的删除
         Delete(index, row) {
             deletePods('kube-system', row.name).then(res => {
-                console.log('删除接口返回的数据：', res);
+                // console.log
+('删除接口返回的数据：', res);
             });
         },
         // 虚拟及诶单表格中的修改
@@ -579,10 +580,15 @@ export default {
         }
         .el-table {
             .linechartbox {
+                line-height: 40px;
                 .echarts {
                     width: 110px;
                     height: 38px;
                 }
+            }
+            .linechartboxspan {
+                height: 100%;
+                line-height: 40px;
             }
             th,
             td {

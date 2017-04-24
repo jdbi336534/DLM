@@ -113,7 +113,7 @@ export default {
     computed: {},
     methods: {
         drew(obj) {
-            console.log('relinecpu')
+            // console.log('relinecpu')
             var that = this;
             let mylinememoryChartlist = document.getElementsByClassName(obj.classname);
             let mylinememoryChartarraylist = [];
@@ -124,7 +124,7 @@ export default {
                     mylinememoryChartarraylist.push(mylinememoryChart);
                     this.linememorydata.linememoryobj.ip = temparr[n].metadata.name;
                     virnodeone(this.linememorydata.linememoryobj).then(res => {
-                        console.log('virtualnode-one-res-mmmm', res)
+                        // console.log('virtualnode-one-res-mmmm', res)
                         that.changedata(res, obj.option);
                         mylinememoryChart.setOption(obj.option);
                     }).then(() => {

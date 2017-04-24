@@ -134,12 +134,12 @@ export default {
             // console.log('renetwork')
             var that = this;
             this.loading2 = false;
-            console.log('this.loading', this.loading2)
+            // console.log('this.loading', this.loading2)
             let mynetworkChart = echarts.init(document.getElementById(obj.id));
             if (this.networkdata.type === 'all') {
                 mynetworkChart.setOption(obj.option);
                 this.loading2 = false;
-                console.log('drew-loading', this.loading2)
+                // console.log('drew-loading', this.loading2)
                 this.$emit('networkresize', mynetworkChart);
                 // // mycpuChart.showLoading();
                 // nodeclusterchart(this.networkdata.networkobj).then(res => {
@@ -171,6 +171,9 @@ export default {
                 seriesdata.push(valueGB);
             }
             chartdata.xAxis[0].data = xAxisdata;
+            chartdata.yAxis.min = Math.floor(seriesdata.sort(function(a, b) {
+                return a - b;
+            })[0])
             chartdata.series[0].data = seriesdata;
             // console.log('node-this.cpuchartdata', chartdata)
         },

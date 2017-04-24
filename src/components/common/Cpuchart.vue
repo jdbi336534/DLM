@@ -18,12 +18,23 @@ export default {
     name: 'view',
     components: {},
     props: {
-        cpudata: null,
+        cpudata: {
+            type: Object,
+            default: function() {
+                return {
+                    cpuobj: {
+                        type: 'cpu',
+                        name: 'usage_rate'
+                    },
+                    type: 'all',
+                    pagetype: 'node',
+                }
+            }
+        }
     },
     data() {
         return {
             loading: true,
-            getcpuchartdata: {},
             option: {
                 title: {
                     text: 'cpu',
@@ -145,7 +156,7 @@ export default {
             } else if (this.cpudata.type === 'one') {
                 if (this.cpudata.pagetype === 'virtualnode') {
                     virnodeone(this.cpudata.cpuobj).then(res => {
-                        console.log('virtualnode-one-res', res)
+                        // console.log('virtualnode-one-res', res)
                         that.changedata(res, obj.option);
                         mycpuChart.setOption(obj.option);
                         this.loading = false;
@@ -177,7 +188,7 @@ export default {
         assignment(assignment) {
             this.cpudata = assignment;
             var that = this;
-            console.log('this.cpudata', this.cpudata)
+            // console.log('this.cpudata', this.cpudata)
             this.drew({
                 id: 'cpu-chart-box',
                 option: that.option

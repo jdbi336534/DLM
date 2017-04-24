@@ -1,14 +1,15 @@
 <template>
   <div class="security">安全
-    <div class="echart">
-      <chart id="scatter" :options="scatter" auto-resize></chart>
-    </div>
-    <div class="echart">
-      <chart id="scatter" :options="scatter" auto-resize></chart>
-    </div>
-    <div class="echart">
-      <chart id="scatter" :options="scatter" auto-resize></chart>
-    </div>
+   <!-- <div class="echart">
+    <chart id="scatter" :options="scatter" auto-resize></chart>
+</div>
+<div class="echart">
+    <chart id="scatter" :options="scatter" auto-resize></chart>
+</div>
+<div class="echart">
+    <chart id="scatter" :options="scatter" auto-resize></chart>
+</div>
+ -->
   </div>
 </template>
 <script>

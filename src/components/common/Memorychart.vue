@@ -18,7 +18,19 @@ export default {
     name: 'view',
     components: {},
     props: {
-        memorydata: null,
+        memorydata: {
+            type: Object,
+            default: function() {
+                return {
+                    memoryobj: {
+                        type: 'memory',
+                        name: 'usage'
+                    },
+                    type: 'all',
+                    pagetype: 'node',
+                }
+            }
+        }
     },
     data() {
         return {
@@ -36,7 +48,7 @@ export default {
                     top: '0',
                 },
                 grid: {
-                    left: '100',
+                    left: '150',
                     right: '40',
                     top: '36',
                     bottom: '32',
@@ -131,17 +143,19 @@ export default {
             } else if (this.memorydata.type === 'one') {
                 if (this.memorydata.pagetype === 'virtualnode') {
                     virnodeone(this.memorydata.memoryobj).then(res => {
-                        console.log(res)
+                        // console.log(res)
                         that.changedata(res, obj.option);
-                        console.log('obj.option', obj.option)
+                        // console.log('obj.option', obj.option)
                         mymemoryChart.setOption(obj.option);
                         this.loading = false;
                         that.$emit('memoryresize', mymemoryChart);
                     })
                 } else if (this.memorydata.pagetype === 'node') {
                     nodechart(this.memorydata.memoryobj).then(res => {
+                        // console.log('res', res)
                         that.changedata(res, obj.option);
                         mymemoryChart.setOption(obj.option);
+                        // console.log('obj.option', obj.option)
                         this.loading = false;
                         that.$emit('memoryresize', mymemoryChart);
                     })
@@ -159,12 +173,14 @@ export default {
                 seriesdata.push(valueGB);
             }
             chartdata.xAxis.data = xAxisdata;
+            chartdata.yAxis.min = Math.floor(seriesdata.sort(function(a, b) {
+                return a - b;
+            })[0])
             chartdata.series[0].data = seriesdata;
-            // console.log('node-this.cpuchartdata', chartdata)
         },
         assignment(assignment) {
             this.memorydata = assignment;
-            console.log('this.memorydata', this.memorydata);
+            // console.log('this.memorydata', this.memorydata);
             var that = this;
             this.drew({
                 id: 'memory-chart-box',

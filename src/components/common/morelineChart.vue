@@ -27,9 +27,9 @@ export default {
     },
     updated() {},
     created() {
-        console.log('created-optionarg', this.optionarg)
+        // console.log('created-optionarg', this.optionarg)
         this.option.push(this.optionarg);
-        console.log('created-this.option', this.option)
+        // console.log('created-this.option', this.option)
     },
     mounted() {
         console.log('mounted')

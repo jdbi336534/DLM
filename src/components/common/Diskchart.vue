@@ -72,11 +72,11 @@ export default {
                             color: 'rgba(250,250,250,0.7)',
                             fontSize: 12,
                         },
-                        formatter: '{value} °C'
+                        formatter: '{value} GB'
                     }
                 },
                 series: [{
-                    name: '最高气温',
+                    name: '最高磁盘容量',
                     type: 'line',
                     data: [10, 10, 10, 10, 10, 10, 14],
                     symbol: 'none',
@@ -91,7 +91,7 @@ export default {
                         }
                     }
                 }, {
-                    name: '最低气温',
+                    name: '最低磁盘容量',
                     type: 'line',
                     symbol: 'none',
                     data: [6, 6, 6, 6, 6, 6, 5],
@@ -123,7 +123,7 @@ export default {
     computed: {},
     methods: {
         drew(obj) {
-            console.log('重回disk');
+            // console.log('重回disk');
             var mydiskChart = echarts.init(document.getElementById(obj.id));
             mydiskChart.setOption(obj.option);
             this.$emit('diskresize', mydiskChart);

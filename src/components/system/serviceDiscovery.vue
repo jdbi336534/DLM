@@ -54,7 +54,6 @@ export default {
     methods: {
         getservicesDiscovery() {
             servicesDiscovery().then(res => {
-                console.log('getServices', res)
                 this.servicediscoverylist = res.items;
                 for (var j = 0; j < this.servicediscoverylist.length; j++) {
                     var arr = [];
@@ -65,7 +64,7 @@ export default {
                     var labelstring = arr.join('; ');
                     this.servicediscoverylist[j].metadata.labelstring = labelstring;
                 }
-                console.log('this.servicediscoverylist', this.servicediscoverylist)
+                // console.log('this.servicediscoverylist', this.servicediscoverylist)
             })
         },
         handleCurrentChange(val) {

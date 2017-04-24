@@ -110,11 +110,7 @@ export default {
         created() {
             var that = this;
             window.onresize = function() {
-                console.log('window.onresize')
-                console.log('that.resizelist', that.resizelist)
-                console.log('that.resizelist', that.resizelist.length)
                 for (var k = 0; k < that.resizelist.length; k++) {
-                    console.log('k', that.resizelist[k])
                     that.resizelist[k].resize();
                 }
             }
@@ -138,7 +134,7 @@ export default {
                     }
                     temparr.push(tempobj);
                 }
-                console.log('temparr:', temparr);
+                // console.log('temparr:', temparr);
                 this.tableData = temparr;
             });
         },
@@ -162,7 +158,7 @@ export default {
             handleCurrentChange() {},
             Delete(index, row) {
                 deletePods('kube-system', row.name).then(res => {
-                    console.log('删除接口返回的数据：', res);
+                    // console.log('删除接口返回的数据：', res);
                 });
             },
             Edit(index, row) {},

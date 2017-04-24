@@ -56,7 +56,7 @@ export default {
             getPods('kube-system', this.$route.params.pod).then(res => {
                 this.selectedOptions[0] = res.metadata.labels['k8s-app'] || res.metadata.labels['app'];
                 this.selectedOptions[1] = this.$route.params.pod;
-                console.log(' this.selectedOptions:', this.selectedOptions[0], this.selectedOptions[1]);
+                // console.log(' this.selectedOptions:', this.selectedOptions[0], this.selectedOptions[1]);
             }).then(() => {
                 // 调用接口，请求下级菜单数据
                 getPods('kube-system', '').then(res => {
@@ -124,7 +124,7 @@ export default {
                         this.textarea = data;
                         this.textarealoading = false;
                     }, (xhr) => {
-                        console.log('xhr:', xhr);
+                        // console.log('xhr:', xhr);
                         // 失败的回调
                         this.$message.error('请求出错，状态码：' + xhr.status);
                         this.textarea = '';

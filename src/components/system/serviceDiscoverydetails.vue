@@ -168,7 +168,7 @@ export default {
         created() {},
         mounted() {
             servicesDiscoverydetails(this.$route.params.ip).then(res => {
-                console.log('servicesDiscoverydetails-res', res)
+                // console.log('servicesDiscoverydetails-res', res)
                 this.detailedinformation = res;
                 var arr = [];
                 for (let i in this.detailedinformation.metadata.labels) {
@@ -176,27 +176,19 @@ export default {
                     arr.push(str);
                 }
                 this.detailedinformation.metadata.labelslist = arr;
-                console.log('this.detailedinformation', this.detailedinformation)
-                console.log(this.detailedinformation.spec.selector['k8s-app'])
             })
             getPods().then(res => {
-                console.log('xnjd', res)
-                console.log(this.detailedinformation.spec.selector['k8s-app'])
                 for (let k = 0; k < res.items.length; k++) {
                     if (res.items[k].metadata.labels['k8s-app'] === this.detailedinformation.spec.selector['k8s-app']) {
                         this.virtuualnode.push(res.items[k])
                     }
                 }
-                console.log('this.virtuualnode', this.virtuualnode)
+                // console.log('this.virtuualnode', this.virtuualnode)
             })
 
             var that = this;
             window.onresize = function() {
-                console.log('window.onresize')
-                console.log('that.resizelist', that.resizelist)
-                console.log('that.resizelist', that.resizelist.length)
                 for (var k = 0; k < that.resizelist.length; k++) {
-                    console.log('k', that.resizelist[k])
                     that.resizelist[k].resize();
                 }
             }

@@ -49,7 +49,7 @@ export default {
 
         },
         created() {
-            console.log('created', this.btnname);
+            // console.log('created', this.btnname);
             if (this.type === 'warning') {
                 this.clasWarning = true;
             } else if (this.type === 'success') {

@@ -137,7 +137,6 @@
 <script>
 import cpuChart from '../common/Cpuchart';
 import memoryChart from '../common/Memorychart';
-// import diskChart from '../common/Diskchart';
 import {
     getPods
 } from '../../assets/js/queryData';
@@ -214,6 +213,14 @@ export default {
             this.condition = res.status.conditions;
             this.tableloading = false;
         });
+    },
+    created() {
+        var that = this;
+        window.onresize = function() {
+            for (var k = 0; k < that.resizelist.length; k++) {
+                that.resizelist[k].resize();
+            }
+        }
     },
     methods: {
         cpuresize(nodeval) {

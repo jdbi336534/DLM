@@ -107,7 +107,7 @@ export default {
 
     },
     mounted() {
-        console.log('linelinedata', this.linedata)
+        // console.log('linelinedata', this.linedata)
         this.drew({
             classname: 'linecpu-chart-box',
             option: this.option
@@ -116,7 +116,7 @@ export default {
     computed: {},
     methods: {
         drew(obj) {
-            console.log('relinecpu')
+            // console.log('relinecpu')
             var that = this;
             let mylinecpuChartlist = document.getElementsByClassName(obj.classname)
             let mylinecpuChartarraylist = [];
@@ -127,7 +127,7 @@ export default {
                     mylinecpuChartarraylist.push(mylinecpuChart);
                     this.linecpuobj.linecpuobj.ip = temparr[k].metadata.name;
                     virnodeone(this.linecpuobj.linecpuobj).then(res => {
-                        console.log('virtualnode-one-res-cccc', res)
+                        // console.log('virtualnode-one-res-cccc', res)
                         that.changedata(res, obj.option);
                         mylinecpuChart.setOption(obj.option);
                     }).then(() => {
@@ -138,7 +138,7 @@ export default {
             });
         },
         drewtwo(temparrarg) {
-            console.log('进入dwo')
+            // console.log('进入dwo')
             var that = this;
             let mylinecpuChartlist = document.getElementsByClassName('linecpu-chart-box')
             let mylinecpuChartarraylisttwo = [];
@@ -147,7 +147,7 @@ export default {
                 mylinecpuChartarraylisttwo.push(mylinecpuChart);
                 this.linecpuobj.linecpuobj.ip = temparrarg[k].name;
                 virnodeone(this.linecpuobj.linecpuobj).then(res => {
-                    console.log('virtualnode-one-res-nt', res)
+                    // console.log('virtualnode-one-res-nt', res)
                     that.changedata(res, that.option);
                     mylinecpuChart.setOption(that.option);
                 }).then(() => {
