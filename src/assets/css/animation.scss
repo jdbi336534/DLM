@@ -1,0 +1,126 @@
+//中心圆旋转
+
+@-webkit-keyframes z2 {
+    from {
+        -webkit-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -ms-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    to {
+        -webkit-transform: rotateZ(-360deg);
+        -moz-transform: rotateZ(-360deg);
+        -ms-transform: rotateZ(-360deg);
+        transform: rotateZ(-360deg);
+    }
+}
+
+@-webkit-keyframes z1{
+    from {
+        -webkit-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -ms-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    to {
+        -webkit-transform: translateX(0) translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(-360deg) scaleX(1) scaleY(1) scaleZ(1);
+        -moz-transform: translateX(0) translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(-360deg) scaleX(1) scaleY(1) scaleZ(1);
+        -ms-transform: translateX(0) translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(-360deg) scaleX(1) scaleY(1) scaleZ(1);
+        transform: translateX(0) translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(-360deg) scaleX(1) scaleY(1) scaleZ(1);
+    }
+}
+
+//音符跳动
+@keyframes myfirst
+{
+    0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+
+@-webkit-keyframes myfirst
+{
+   0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+
+@keyframes myfirst2
+{
+   0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+
+@-webkit-keyframes myfirst2
+{
+    0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+@keyframes myfirst3
+{
+    0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+
+@-webkit-keyframes myfirst3
+{
+    0%{height: 0.27rem;}
+    50% {height: 0.73rem;}
+    100%{height: 0.27rem;}
+}
+
+//波浪
+@-webkit-keyframes grow{
+    0%{-webkit-transform:scale(1)}
+    30%{-webkit-transform:scale(1.5)}
+    100%{-webkit-transform:scale(1)}
+}
+@-moz-keyframes grow{
+    0%{-moz-transform:scale(1)}
+    30%{-moz-transform:scale(1.5)}
+    100%{-moz-transform:scale(1)}
+}
+@keyframes grow{
+    0%{transform:scale(1)}
+    30%{transform:scale(1.5)}
+    100%{transform:scale(1)}
+}
+
+
+
+
+
+
+//Z轴旋转
+@-webkit-keyframes loginMap{
+    from {
+        -webkit-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -ms-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    to {
+        -webkit-transform:  rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        -ms-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes loginMap{
+    from {
+        -webkit-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -ms-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    to {
+        -webkit-transform:  rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        -ms-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}

@@ -1,0 +1,67 @@
+.systemdlm-border-shadow {
+    opacity: 0.2;
+    box-shadow: 0 4px 28px 0 rgba(0, 0, 0, 0.50), inset 0 0 28px 0 #35D7FF;
+}
+
+.systemdlm-table-column {
+    td {
+        color: rgba(36, 202, 243, 0.9);
+        font-size: 14px;
+    }
+    .el-table {
+        td>div a {
+            color: rgba(36, 202, 243, 1);
+            text-decoration: none;
+        }
+    }
+    .el-table th,
+    .el-table td {
+        height: 40px;
+    }
+    .el-table__header-wrapper td,
+    .el-table__body-wrapper td {
+        border-bottom: 1px solid rgba(30, 157, 194, 0.20);
+    }
+    .el-table__header-wrapper {
+        border-bottom: 1px solid rgba(30, 157, 194, 0.20);
+    }
+    .el-table__header-wrapper th,
+    .el-table__header-wrapper thead div {
+        background-color: #0d152f;
+    }
+    //分页样式
+    .block {
+        margin-bottom: 0;
+        .el-pagination {
+            padding-top: 10px;
+            text-align: center;
+            color: #24CAF3;
+            span,
+            input {
+                margin: 0 10px;
+            }
+            button {
+                background: none!important;
+                border-color: #176A8A!important;
+            }
+            .el-pager {
+                li {
+                    background: none;
+                    border-color: #176A8A;
+                    &.active {
+                        background: #13324E;
+                        border-right: 1px solid #176A8A;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+    }
+}
+.echartbox
+{
+    .el-loading-spinner .circular{
+        width: 22px;
+        height: 32px;
+    }
+}
