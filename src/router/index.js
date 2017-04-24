@@ -18,6 +18,7 @@ import offLinelogs from '@/components/system/offLinelogs'
 import onLinelogs from '@/components/system/onLinelogs'
 import security from '@/components/system/security'
 import serviceDiscoverydetail from '@/components/system/serviceDiscoverydetails'
+import sparkline from '@/components/system/sparkline'
 
 Vue.use(Router)
 
@@ -94,6 +95,10 @@ export default new Router({
                 path: 'security',
                 name: 'security',
                 component: security
+            }, {
+                path: 'sparkline',
+                name: 'sparkline',
+                component: sparkline
             }]
         }]
     }, {
