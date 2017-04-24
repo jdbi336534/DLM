@@ -28,13 +28,19 @@ export default {
             setTimeout(() => {
                 $('.inlinesparkline').sparkline();
                 // 给定值
-                var myvalues = [10, 8, 5, 7, 4, 4, 1];
+                var myvalues = [100, 80, 50, 70, 40, 40, 10, 100, 80, 50, 70, 40, 4, 9, 10, 8, 5, 7, 4, 4, 6, 10, 8, 5, 7, 4, 4, 1];
                 $('.dynamicsparkline').sparkline(myvalues);
                 // 给定值和参数，可以制定画图的类型以及颜色
                 $('.dynamicbar').sparkline(myvalues, {
                     type: 'line',
                     lineColor: '#00e3ef',
-                    fillColor: '#ffffff',
+                    width: '200',
+                    height: '100',
+                    lineWidth: 2,
+                    fillColor: null,
+                    spotColor: null,
+                    minSpotColor: null,
+                    maxSpotColor: null,
                     drawNormalOnTop: false
                 });
                 // 使用'html' 参数的话是制定数据在标签中，代替一个数组值
